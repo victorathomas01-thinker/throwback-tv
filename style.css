@@ -1,0 +1,245 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #171717;
+    color: #f6efe2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topbar {
+    height: 92px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 18px;
+    border-bottom: 1px solid #6b2a32;
+    background: #151515;
+}
+
+.logo {
+    width: 72px;
+    height: 72px;
+    background: #963d3f;
+    color: #111;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    border-radius: 8px;
+}
+
+.logo span {
+    font-size: 15px;
+}
+
+.search {
+    flex: 1;
+    max-width: 920px;
+    background: #222;
+    border: none;
+    color: #eee;
+    padding: 16px 18px;
+    border-radius: 6px;
+    font-size: 17px;
+}
+
+.prototype-badge {
+    color: #d9cbb6;
+    border: 1px solid #5d3d3d;
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.controls button {
+    background: transparent;
+    color: #f6efe2;
+    border: 1px solid #5d3d3d;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.page {
+    padding: 48px 38px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 24px;
+}
+
+.now-card {
+    max-width: 640px;
+    border: 1px solid #3c3c3c;
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.eyebrow {
+    color: #d6b863;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 900;
+}
+
+.now-card h2 {
+    margin: 8px 0;
+    font-size: 28px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.guide-shell {
+    overflow-x: auto;
+}
+
+.time-header {
+    display: grid;
+    grid-template-columns: 170px repeat(4, 370px);
+    border-bottom: 1px solid #3c3c3c;
+    min-width: 1650px;
+}
+
+.time-cell {
+    padding: 18px 20px;
+    font-weight: bold;
+    color: #d9cbb6;
+}
+
+.guide-grid {
+    min-width: 1650px;
+}
+
+.channel-row {
+    display: grid;
+    grid-template-columns: 170px repeat(4, 370px);
+    min-height: 112px;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+.channel-cell {
+    padding: 18px;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.channel-name {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.channel-era {
+    font-size: 13px;
+    color: #d6b863;
+}
+
+.program-cell {
+    padding: 18px 22px;
+    border-right: 1px solid #333;
+    background: #1b1b1b;
+}
+
+.program-cell.active {
+    background: #f2d35f;
+    color: #121212;
+}
+
+.program-title {
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.program-episode,
+.program-time {
+    color: inherit;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.channel-panel {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.channel-panel.hidden {
+    display: none;
+}
+
+.panel-content {
+    width: 420px;
+    background: #202020;
+    border: 1px solid #6b2a32;
+    padding: 28px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: #111;
+    color: white;
+    border: 1px solid #555;
+}
+
+.small-note {
+    color: #bbb;
+    font-size: 13px;
+}
+
+body.crt {
+    filter: contrast(1.12) saturate(0.85);
+}
+
+body.crt::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.05) 1px,
+            transparent 2px,
+            transparent 4px
+        );
+    mix-blend-mode: overlay;
+}
