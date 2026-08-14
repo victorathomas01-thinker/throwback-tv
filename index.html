@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throwback TV Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="logo">TV<br><span>GUIDE</span></div>
+
+        <input
+            id="searchInput"
+            class="search"
+            type="text"
+            placeholder="Search TV Shows and Movies..."
+        >
+
+        <div class="prototype-badge">Browser Prototype</div>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <h1>Throwback TV Schedule</h1>
+
+            <div class="now-card">
+                <p class="eyebrow">NOW PLAYING</p>
+                <h2 id="nowTitle">Loading...</h2>
+                <p id="nowEpisode"></p>
+                <p id="nowMeta"></p>
+                <p id="nowRemaining"></p>
+            </div>
+
+            <div class="controls">
+                <button id="cleanModeButton">Clean Mode</button>
+                <button id="crtModeButton">CRT Mode</button>
+                <button id="refreshButton">Refresh Guide</button>
+            </div>
+        </section>
+
+        <section class="guide-shell">
+            <div id="timeHeader" class="time-header"></div>
+            <div id="guideGrid" class="guide-grid"></div>
+        </section>
+    </main>
+
+    <div id="channelPanel" class="channel-panel hidden">
+        <div class="panel-content">
+            <button id="closePanelButton" class="close-button">×</button>
+            <h2 id="panelChannelName"></h2>
+            <p id="panelDescription"></p>
+
+            <label for="eraSelect">Era</label>
+            <select id="eraSelect"></select>
+
+            <p class="small-note">
+                Era changes only affect this channel row. That keeps each channel historically flexible.
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
