@@ -1,84 +1,108 @@
 # Throwback TV
 
-A browser-based nostalgic TV guide prototype that recreates the feeling of channel surfing through older television eras.
+A browser-based nostalgic TV-guide prototype that recreates the feeling of channel surfing through older television eras.
 
 ## Overview
 
-Throwback TV presents era-specific channels, shows, and episodes through a generated schedule rather than a conventional streaming-library interface. The current prototype focuses on the experience of opening a TV guide, seeing what is "on," switching between channels, and browsing programming from different eras.
+Throwback TV presents era-specific channels, shows, and episodes through a generated schedule rather than a conventional streaming-library interface. The prototype focuses on the experience of opening a guide, seeing what is "on," browsing channels, and changing a channel's era.
 
-The project is intentionally a discovery and scheduling experience rather than a platform for hosting copyrighted video.
+The project is intentionally a scheduling and discovery interface. It does **not** host or stream copyrighted television content.
 
-## Current Prototype Features
+## Current Features
 
-- Era selector for changing the style and programming pool
 - Multiple nostalgia-focused channels
-- Era-specific show and episode data
-- Generated 30-minute programming schedules
+- Era-specific show and episode datasets
+- Generated 30-minute programming blocks
 - Four visible schedule slots per channel
-- "Now Playing" state
-- Search field
-- Channel detail views
-- Schedule refresh controls
+- Live "Now Playing" state based on the current clock
+- Search by channel, show, episode, or category
+- Clickable channel detail panel
+- Per-channel era switching
+- Manual schedule refresh
 - Clean and CRT-inspired display modes
-- Deterministic show/episode rotation
+- Deterministic show and episode rotation
+- Automatic re-render every minute
 
 ## Tech Stack
 
 - HTML
 - CSS
 - JavaScript
+- Browser DOM APIs
 
-The current implementation is intentionally lightweight and browser-based, with no production backend or account system.
+No framework, backend, build system, or account layer is required for the current prototype.
 
 ## Architecture
 
-The prototype is organized around a straightforward client-side flow:
+The application is organized around a simple client-side flow:
 
 `Data → State → Schedule Generator → Render → Events`
 
 ### Data
 
-Stores the channels, shows, episodes, and era-specific programming information used by the guide.
+`script.js` contains channel definitions, era-specific programming pools, show categories, and episode lists.
 
 ### State
 
-Tracks the active era, selected channel, current schedule, search state, and display preferences.
+The app tracks the selected channel, generated schedule, and active search query. Each channel also stores its currently selected era.
 
 ### Schedule Generator
 
-Builds the channel lineup and rotates through show/episode data to create repeatable schedule blocks.
+The generator creates four 30-minute programming slots for every channel. Shows and episodes currently rotate deterministically, which makes the behavior easy to understand while the scheduling model is still a prototype.
 
 ### Render
 
-Updates the guide, Now Playing information, channel details, and other interface elements from the current application state.
+The UI renders:
+
+- the time header
+- channel rows
+- program cards
+- the current program
+- remaining minutes
+- channel details and era controls
 
 ### Events
 
-Handles user interaction such as selecting eras, changing channels, searching, refreshing schedules, and switching display modes.
+User interactions handle:
+
+- guide search
+- channel selection
+- era changes
+- clean/CRT mode switching
+- schedule refresh
+
+## Run Locally
+
+1. Download or clone the repository.
+2. Open `index.html` in a modern browser.
+3. Use the search field to filter the current guide.
+4. Click a channel name to switch its era.
+5. Toggle Clean Mode or CRT Mode to change presentation.
 
 ## Why I Built It
 
-I wanted to explore a different way to build a nostalgia-focused entertainment product. Instead of cloning a modern streaming homepage, I focused on the experience of older television: schedules, channels, discovery, and the feeling that something is already "on" when you arrive.
+I wanted to explore a nostalgia-focused entertainment product that did not simply imitate a modern streaming homepage. The interesting part to me was the older TV experience itself: schedules, channels, discovery, programming blocks, and the feeling that something is already on when you arrive.
 
-The project gave me practice designing application state, generating structured schedules from content data, building interactive browser interfaces, and organizing a small JavaScript application around a clear data flow.
+The project gave me practice with application state, time-based logic, structured content data, deterministic generation, DOM rendering, filtering, and interactive UI behavior in vanilla JavaScript.
 
-## Project Status
+## Current Limitations
 
-**Working browser prototype / work in progress.**
-
-The public repository is being organized for portfolio use. The existing prototype source will be added as it is cleaned up for public release.
+- Programming data is manually defined in the source.
+- Scheduling is deterministic rather than weighted by time of day, category, ratings, seasons, or holidays.
+- Era selections are not persisted after the page is closed.
+- The guide is horizontally scrollable rather than fully responsive on small screens.
+- There is no playback layer or external streaming integration.
 
 ## Planned Improvements
 
-Ideas already identified for later iterations include:
-
-- Weighted scheduling instead of purely deterministic rotation
-- Saved viewing/progress state
-- Expanded channel and era data
-- More sophisticated programming rules
-- Additional nostalgic display options
-- Improved schedule navigation and discovery
+- Weighted scheduling rules
+- Saved viewing and era preferences
+- Expanded channel and era datasets
+- More sophisticated daypart and holiday programming
+- Improved mobile layout
+- Program detail views
+- Better schedule navigation across larger time windows
 
 ## Copyright Note
 
-Throwback TV is a personal software project intended to demonstrate interface, scheduling, and discovery concepts. It does not host or distribute copyrighted television or film content. Any referenced titles remain the property of their respective rights holders.
+Throwback TV is a personal software project intended to demonstrate interface, scheduling, and discovery concepts. It does not host or distribute copyrighted television or film content. Referenced titles and channel names remain the property of their respective rights holders.
