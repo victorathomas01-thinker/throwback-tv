@@ -1,66 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Throwback TV Guide</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>Throwback TV 2.0</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="scanlines" aria-hidden="true"></div>
 
-    <header class="topbar">
-        <div class="logo">TV<br><span>GUIDE</span></div>
+  <header class="topbar">
+    <button class="brand" id="homeButton" aria-label="Throwback TV home">
+      <span class="brand-mark">TB</span>
+      <span><strong>Throwback TV</strong><small>2.0</small></span>
+    </button>
 
-        <input
-            id="searchInput"
-            class="search"
-            type="text"
-            placeholder="Search TV Shows and Movies..."
-        >
-
-        <div class="prototype-badge">Browser Prototype</div>
-    </header>
-
-    <main class="page">
-        <section class="hero">
-            <h1>Throwback TV Schedule</h1>
-
-            <div class="now-card">
-                <p class="eyebrow">NOW PLAYING</p>
-                <h2 id="nowTitle">Loading...</h2>
-                <p id="nowEpisode"></p>
-                <p id="nowMeta"></p>
-                <p id="nowRemaining"></p>
-            </div>
-
-            <div class="controls">
-                <button id="cleanModeButton">Clean Mode</button>
-                <button id="crtModeButton">CRT Mode</button>
-                <button id="refreshButton">Refresh Guide</button>
-            </div>
-        </section>
-
-        <section class="guide-shell">
-            <div id="timeHeader" class="time-header"></div>
-            <div id="guideGrid" class="guide-grid"></div>
-        </section>
-    </main>
-
-    <div id="channelPanel" class="channel-panel hidden">
-        <div class="panel-content">
-            <button id="closePanelButton" class="close-button">×</button>
-            <h2 id="panelChannelName"></h2>
-            <p id="panelDescription"></p>
-
-            <label for="eraSelect">Era</label>
-            <select id="eraSelect"></select>
-
-            <p class="small-note">
-                Era changes only affect this channel row. That keeps each channel historically flexible.
-            </p>
-        </div>
+    <div class="top-actions">
+      <label class="search-wrap">
+        <span>Search</span>
+        <input id="searchInput" type="search" placeholder="Show, episode, channel..." autocomplete="off">
+      </label>
+      <button id="crtButton" class="ghost-button" type="button">CRT: Off</button>
     </div>
+  </header>
 
-    <script src="script.js"></script>
+  <main class="app-shell">
+    <section class="player-section" aria-label="Current channel">
+      <div class="tv-frame">
+        <div class="screen" id="screen">
+          <div class="screen-noise" aria-hidden="true"></div>
+          <div class="channel-bug" id="channelBug"></div>
+          <div class="screen-copy">
+            <p class="eyebrow" id="screenEyebrow">NOW PLAYING</p>
+            <h1 id="screenTitle">Loading Throwback TV...</h1>
+            <p id="screenEpisode" class="screen-episode"></p>
+            <p id="screenMeta" class="screen-meta"></p>
+          </div>
+          <div class="tune-overlay hidden" id="tuneOverlay" aria-live="polite"></div>
+        </div>
+
+        <div class="tv-controls">
+          <div>
+            <span class="status-dot"></span>
+            <strong id="liveClock">--:--</strong>
+            <span id="dateLabel">Live</span>
+          </div>
+          <div class="channel-surf-controls">
+            <button id="previousChannelButton" aria-label="Previous channel">CH −</button>
+            <button id="favoriteButton" aria-label="Favorite current channel">☆</button>
+            <button id="nextChannelButton" aria-label="Next channel">CH +</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="player-info">
+        <p class="eyebrow">YOU TUNED IN</p>
+        <h2 id="tunedChannelName">Channel</h2>
+        <p id="tunedChannelTagline" class="muted"></p>
+        <div class="progress-shell" aria-label="Program progress">
+          <div class="progress-bar" id="programProgress"></div>
+        </div>
+        <div class="progress-copy">
+          <span id="elapsedLabel">0 min in</span>
+          <span id="remainingLabel">0 min left</span>
+        </div>
+        <p id="tunedDescription" class="description"></p>
+      </aside>
+    </section>
+
+    <section class="control-strip" aria-label="Guide controls">
+      <div class="date-control">
+        <label for="dateInput">Time machine</label>
+        <input id="dateInput" type="date">
+        <button id="todayButton" type="button">Today</button>
+      </div>
+      <div class="guide-navigation">
+        <button id="earlierButton" type="button">← Earlier</button>
+        <button id="jumpNowButton" type="button">Jump to now</button>
+        <button id="laterButton" type="button">Later →</button>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PROGRAM GUIDE</p>
+          <h2>What’s on</h2>
+        </div>
+        <p id="guideWindowLabel" class="muted"></p>
+      </div>
+
+      <div class="guide-viewport" id="guideViewport">
+        <div class="guide" id="guide">
+          <div class="time-row" id="timeHeader"></div>
+          <div id="guideRows"></div>
+        </div>
+      </div>
+      <div id="emptyState" class="empty-state hidden">No programs match that search.</div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="channelModal" role="dialog" aria-modal="true" aria-labelledby="modalChannelName">
+    <div class="modal-card">
+      <button class="close-button" id="closeModalButton" aria-label="Close">×</button>
+      <p class="eyebrow">CHANNEL SETTINGS</p>
+      <h2 id="modalChannelName"></h2>
+      <p id="modalChannelDescription" class="muted"></p>
+      <label for="eraSelect">Era</label>
+      <select id="eraSelect"></select>
+      <p class="small-note">Each channel keeps its own era, so your lineup can mix different years.</p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
